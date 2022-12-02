@@ -2,8 +2,8 @@
 
 Team:
 
-* Person 1 - Which microservice?
-* Person 2 - Which microservice?
+* Person 1 - Ryan Holzer - Hats Microservice
+* Person 2 - Hanna Ericksno - Shoes Microservice
 
 ## Design
 
