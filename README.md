@@ -3,7 +3,7 @@
 Team:
 
 * Person 1 - Ryan Holzer - Hats Microservice
-* Person 2 - Hanna Ericksno - Shoes Microservice
+* Person 2 - Hanna Erickson - Shoes Microservice
 
 ## Design
 
