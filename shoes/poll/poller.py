@@ -9,7 +9,7 @@ sys.path.append("")
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "shoes_project.settings")
 django.setup()
 
-from api.shoes_rest.models import BinVO
+from shoes_rest.models import BinVO
 
 def poll():
     while True:

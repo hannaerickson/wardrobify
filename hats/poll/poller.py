@@ -11,7 +11,7 @@ django.setup()
 
 # Import models from hats_rest, here.
 # from hats_rest.models import Something
-from api.hats_rest.models import LocationVO
+from hats_rest.models import LocationVO
 
 def poll():
     while True:
