@@ -24,7 +24,11 @@ def poll():
             for location in content["locations"]:
                 LocationVO.objects.update_or_create(
                     import_href=location["href"],
-                    defaults={"closet_name": location["closet_name"]},
+                    defaults={
+                        "closet_name": location["closet_name"],
+                        "section_number": location["section_number"],
+                        "shelf_number": location["shelf_number"],
+                    },
                 )
         except Exception as e:
             print(e, file=sys.stderr)
