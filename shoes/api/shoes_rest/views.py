@@ -26,6 +26,7 @@ class ShoeListEncoder(ModelEncoder):
 class ShoeDetailEncoder(ModelEncoder):
     model = Shoe
     properties = [
+        "id",
         "manufacturer",
         "model_name",
         "color",

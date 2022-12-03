@@ -1,12 +1,14 @@
 import React from 'react';
+import ShoesForm from './ShoesForm';
+import { Link } from 'react-router-dom';
 
 function ShoesColumn(props) {
     return (
         <div className="col">
-            {props.list.map(data => {
+            {props.list.map((data) => {
                 const shoe = data;
                 return (
-                    <div key={shoe.id} className="card mb-3 shadow">
+                    <div key={data.id} className="card mb-3 shadow">
                         <img src={shoe.picture_url} className="card-img-top" />
                         <div className="card-body">
                             <h5 className="card-title">{shoe.manufacturer}</h5>
@@ -14,7 +16,14 @@ function ShoesColumn(props) {
                             <p className="card-text">{shoe.color}</p>
                         </div>
                         <div className="card-footer">
-                            <button type="button" class="btn btn-outline-danger">Delete</button>
+                            <button onClick={async () => {
+                                const deleteUrl = `http://localhost:8080/api/shoes/${shoe.id}`;
+                                const response = await fetch(deleteUrl, {method: "DELETE"});
+                                if (response.ok) {
+                                    console.log("Deleted shoe", shoe.id)
+                                }
+                            }
+                         } type="button" className="btn btn-outline-danger">Delete</button>
                         </div>
                     </div>
                 );
@@ -71,7 +80,7 @@ class ShoesList extends React.Component {
             <div className="container">
                 <h2>My Shoes</h2>
                 <p>
-                    <button type="button" class="btn btn-outline-info">Add a shoe</button>
+                    <Link to='/shoes/new' type="button" className="btn btn-outline-info">Add a shoe</Link>
                 </p>
                 <div className="row">
                     {this.state.shoesColumns.map((shoeList, index) => {
