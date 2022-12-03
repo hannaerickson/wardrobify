@@ -9,12 +9,19 @@ class BinVODetailEncoder(ModelEncoder):
     model = BinVO
     properties = [
         "closet_name",
+        "bin_number",
         "import_href",
     ]
 
 class ShoeListEncoder(ModelEncoder):
     model = Shoe
-    properties = ["manufacturer", "model_name", "id"]
+    properties = [
+        "manufacturer",
+        "model_name",
+        "color",
+        "picture_url",
+        "id"
+    ]
 
 class ShoeDetailEncoder(ModelEncoder):
     model = Shoe
@@ -23,7 +30,7 @@ class ShoeDetailEncoder(ModelEncoder):
         "model_name",
         "color",
         "picture_url",
-        "bin",
+        "bin"
     ]
     encoders = {
         "bin": BinVODetailEncoder(),
@@ -34,7 +41,6 @@ def api_list_shoes(request, bin_vo_id=None):
     if request.method == "GET":
         if bin_vo_id is not None:
             shoes = Shoe.objects.filter(bin=bin_vo_id)
-            print(shoes)
         else:
             shoes = Shoe.objects.all()
         return JsonResponse(
