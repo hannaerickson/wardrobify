@@ -3,7 +3,6 @@ import HatsForm from './HatsForm';
 
 
 
-
 function HatsColumn(props) {
     /*console.log(props.list)*/
     return (
@@ -12,14 +11,20 @@ function HatsColumn(props) {
                 const hat = data;
                 /*console.log(hat);*/
                 return (
-                    <div key={hat.id} className='card mb-3 shadow'>
+                    <div key={data.id} className='card mb-3 shadow'>
                         <img src={hat.picture_url} className='card-img-top' />
                         <div className='card-body'>
                             <h5 className='card-title'>{hat.color} {hat.style_name}</h5>
                         </div>
                         <div className='card-footer'>
                             This hat is made of the finest {hat.fabric}
-                            <button>Delete</button>
+                            <button className='btn btn-outline-danger' onClick={async () => {
+                                const deleteUrl = `http://localhost:8090/api/hats/${hat.id}`;
+                                const response = await fetch(deleteUrl, {method: 'DELETE'});
+                                if (response.ok) {
+                                    console.log(`deleted hat: ${hat.id}`)
+                                }
+                            }}>Delete</button>
                         </div>
                     </div>
                 );
@@ -37,6 +42,7 @@ class HatsList extends React.Component {
             hatsColumns: [[], [], [], []],
         };
     }
+
 
     async componentDidMount() {
         const url = 'http://localhost:8090/api/hats/';

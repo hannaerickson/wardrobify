@@ -102,7 +102,7 @@ class HatsForm extends React.Component {
                         <input onChange={this.handleColorChange} placeholder='color' name='color' required type='text' value={this.state.color} className='form-contol'/>
                         <input onChange={this.handlePictureUrlChange} placeholder='picture url' name='picture_url' value={this.state.pictureUrl} required type='text' className='form-contol'/>
                         <select onChange={this.handleLocationChange} value={this.state.location} name='location' className='form-select'>
-                            <option value="">pick a location</option>
+                            <option value="">pick a closet</option>
                             {this.state.locations.map(location => {
                                 return(
                                     <option key={location.id} value={location.id}>
@@ -111,7 +111,7 @@ class HatsForm extends React.Component {
                                 );
                             })}
                         </select>
-                        <p><button>Add</button></p>
+                        <p><button className='btn btn-outline-success'>Add</button></p>
                     </div>
 
                 </form>
