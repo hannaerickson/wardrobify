@@ -6,7 +6,7 @@ function ShoesForm2(props) {
     const [manufacturer, setManufacturer] = useState('');
     const [model_name, setModelName] = useState('');
     const [color, setColor] = useState('');
-    const [picutre_url, setPictureUrl] = useState('');
+    const [picture_url, setPictureUrl] = useState('');
     const [bin, setBin] = useState('');
     const [data, setData] = useState(null);
 
@@ -23,7 +23,7 @@ function ShoesForm2(props) {
 
     useEffect (() => {
         const url = 'http://localhost:8100/api/bins/';
-        fetch(url)
+        fetch(url, {method:"GET"})
             .then(response => {
                 return (response.json())
             })
@@ -38,7 +38,7 @@ function ShoesForm2(props) {
             manufacturer,
             model_name,
             color,
-            picutre_url,
+            picture_url,
             bin,
         }
         console.log(shoe)
@@ -54,12 +54,13 @@ function ShoesForm2(props) {
         if (response.ok) {
             const newShoe = await response.json();
             console.log(newShoe);
-        }
-        setManufacturer('')
-        setModelName('')
-        setColor('')
-        setBin('')
-        setPictureUrl('')
+
+            setManufacturer('')
+            setModelName('')
+            setColor('')
+            setBin('')
+            setPictureUrl('')
+        };
     }
 
     return ( data &&
@@ -94,7 +95,7 @@ function ShoesForm2(props) {
                     </div>
                     <div>
                         <p><label htmlFor="picture_url">Upload an image:</label></p>
-                        <input onChange={handlePictureChange} value={picutre_url} placeholder="Picture URL" required type="textarea" name="picture_url" id="picture_url" className="form-control"/>
+                        <input onChange={handlePictureChange} value={picture_url} placeholder="Picture URL" required type="textarea" name="picture_url" id="picture_url" className="form-control"/>
                     </div>
                     <br></br>
                     <button className="btn btn-primary">Create</button>
