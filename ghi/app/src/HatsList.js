@@ -1,15 +1,15 @@
 import React from 'react';
 import HatsForm from './HatsForm';
+import HatsFormHooks from './HatsFormHooks';
 
 
 
 function HatsColumn(props) {
-    /*console.log(props.list)*/
+
     return (
         <div className='col'>
             {props.list.map(data => {
                 const hat = data;
-                /*console.log(hat);*/
                 return (
                     <div key={data.id} className='card mb-3 shadow'>
                         <img src={hat.picture_url} className='card-img-top' />
@@ -22,7 +22,7 @@ function HatsColumn(props) {
                                 const deleteUrl = `http://localhost:8090/api/hats/${hat.id}`;
                                 const response = await fetch(deleteUrl, {method: 'DELETE'});
                                 if (response.ok) {
-                                    console.log(`deleted hat: ${hat.id}`)
+                                    alert(`deleted hat: ${hat.id}`)
                                 }
                             }}>Delete</button>
                         </div>
@@ -53,13 +53,11 @@ class HatsList extends React.Component {
                 const data = await response.json();
                 const requests = [];
                 for (let hat of data.hats) {
-                    /*console.log(hat)*/
                     const detailUrl = `http://localhost:8090/api/hats/${hat.id}`;
                     requests.push(fetch(detailUrl));
                 }
                 const responses = await Promise.all(requests);
                 const hatsColumns = [[], [], [], []];
-                /*console.log(responses)*/;
 
                 let i = 0
                 for (const detailResponse of responses) {
@@ -74,7 +72,6 @@ class HatsList extends React.Component {
                         console.error(detailResponse);
                     }
                 }
-                /*console.log(hatsColumns);*/
                 this.setState({hatsColumns: hatsColumns});
             }
         } catch (e) {
@@ -86,7 +83,7 @@ class HatsList extends React.Component {
         return(
             <div className='container'>
                 <h2>My Hats</h2>
-                <HatsForm></HatsForm>
+                <HatsFormHooks></HatsFormHooks>
                 <div className='row'>
                     {this.state.hatsColumns.map((hatsList, index) => {
                         return (
