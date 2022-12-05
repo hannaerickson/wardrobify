@@ -8,7 +8,7 @@ class ShoesForm extends React.Component {
             model_name: '',
             color: '',
             picture_url: '',
-            bins: []
+            bins: [],
         };
         this.handleManufacturerChange = this.handleManufacturerChange.bind(this);
         this.handleModelChange = this.handleModelChange.bind(this);
@@ -44,7 +44,6 @@ class ShoesForm extends React.Component {
         event.preventDefault();
         const data = {...this.state};
         delete data.bins;
-        console.log(data);
 
         const shoeUrl = `http://localhost:8080/api/bins/${data.bin}/shoes/`;
         const fetchConfig = {
@@ -57,8 +56,6 @@ class ShoesForm extends React.Component {
         const response = await fetch(shoeUrl, fetchConfig);
         if (response.ok) {
             const newShoe = await response.json();
-            console.log(newShoe);
-
             const cleared = {
                 manufacturer: '',
                 model_name: '',
@@ -88,7 +85,7 @@ class ShoesForm extends React.Component {
                 <div className="offset-3 col-6">
                 <div className="shadow p-4 mt-4">
                     <h1>Create a new shoe</h1>
-                    <form onSubmit={this.handleSubmit} id="create-location-form">
+                    <form onSubmit={this.handleSubmit} id="create-shoe-form">
                     <div className="form-floating mb-3">
                         <input onChange={this.handleManufacturerChange} value={this.state.manufacturer} placeholder="Manufacturer" required type="text" name="manufacturer" id="manufacturer" className="form-control"/>
                         <label htmlFor="manufacturer">Manufacturer</label>

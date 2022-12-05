@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom';
+
 function MainPage() {
   return (
     <div className="px-4 py-5 my-5 text-center">
@@ -7,6 +9,8 @@ function MainPage() {
           Need to keep track of your shoes and hats? We have
           the solution for you!
         </p>
+        <p><Link to='/hats' type="button" class="btn btn-secondary btn-lg btn-block">Take me to the hats!</Link></p>
+        <p><Link to='/shoes' type="button" class="btn btn-secondary btn-lg btn-block">Take me to the shoes!</Link></p>
       </div>
     </div>
   );
