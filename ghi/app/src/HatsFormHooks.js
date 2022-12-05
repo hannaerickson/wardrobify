@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 
-function HatsFormHooks(props) {
+function HatsFormHooks() {
 
     const [fabric, setFabric] = useState('');
     const [styleName, setStyle] = useState('');

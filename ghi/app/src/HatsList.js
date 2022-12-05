@@ -1,10 +1,22 @@
 import React from 'react';
 import HatsForm from './HatsForm';
 import HatsFormHooks from './HatsFormHooks';
+import { useState } from 'react';
 
 
 
 function HatsColumn(props) {
+
+    const [allHats, setHats] = useState(props.columns)
+    const deleteHat = async (id) => {
+    const deleteUrl = `http://localhost:8090/api/hats/${id}`;
+    const response = await fetch(deleteUrl, {method: 'DELETE'});
+    if (response.ok) {
+        alert(`deleted hat: ${id}`)
+        setHats(allHats.filter(column => column.hat.id !== id))
+    }
+
+    }
 
     return (
         <div className='col'>
@@ -18,13 +30,7 @@ function HatsColumn(props) {
                         </div>
                         <div className='card-footer'>
                             This hat is made of the finest {hat.fabric}
-                            <button className='btn btn-outline-danger' onClick={async () => {
-                                const deleteUrl = `http://localhost:8090/api/hats/${hat.id}`;
-                                const response = await fetch(deleteUrl, {method: 'DELETE'});
-                                if (response.ok) {
-                                    alert(`deleted hat: ${hat.id}`)
-                                }
-                            }}>Delete</button>
+                            <button className='btn btn-outline-danger' onClick={() => deleteHat(hat.id)}>Delete</button>
                         </div>
                     </div>
                 );
@@ -85,9 +91,9 @@ class HatsList extends React.Component {
                 <h2>My Hats</h2>
                 <HatsFormHooks></HatsFormHooks>
                 <div className='row'>
-                    {this.state.hatsColumns.map((hatsList, index) => {
+                    {this.state.hatsColumns.map((hatsColumnList, index, hatsColumns) => {
                         return (
-                            <HatsColumn key={index} list={hatsList}/>
+                            <HatsColumn key={index} list={hatsColumnList} columns={hatsColumns}/>
                         );
                     })}
                 </div>
